@@ -1,0 +1,6 @@
+{
+  "name": "MediKiosk",
+  "description": "Intelligent clinical intake waiting room kiosk and medical consultation platform capturing multilingual patient narratives and delivering structured AI summaries to physicians.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
