@@ -10,6 +10,8 @@ interface PatientHeaderProps {
   onLanguageChange?: (lang: string) => void;
   onOpenMobileSidebar?: () => void;
   onToggleMobileSidebar?: () => void;
+  isSidebarCollapsed?: boolean;
+  onToggleCollapse?: () => void;
   completedStepsCount?: number;
   totalSteps?: number;
   setCurrentView?: (view: AppView) => void;
@@ -63,6 +65,8 @@ export const PatientHeader: React.FC<PatientHeaderProps> = ({
   onLanguageChange = (_lang: string) => {},
   onOpenMobileSidebar,
   onToggleMobileSidebar,
+  isSidebarCollapsed = false,
+  onToggleCollapse,
   completedStepsCount = 0,
   totalSteps = 9,
   setCurrentView = (_view: AppView) => {},
@@ -70,7 +74,14 @@ export const PatientHeader: React.FC<PatientHeaderProps> = ({
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
 
-  const toggleSidebar = onOpenMobileSidebar || onToggleMobileSidebar || (() => {});
+  const toggleSidebar = () => {
+    if (window.innerWidth < 1024) {
+      if (onToggleMobileSidebar) onToggleMobileSidebar();
+      else if (onOpenMobileSidebar) onOpenMobileSidebar();
+    } else {
+      if (onToggleCollapse) onToggleCollapse();
+    }
+  };
 
   const docName = patient?.assignedDoctor?.name || 'Dr. Rajesh Sharma, MD';
   const docRoom = patient?.assignedDoctor?.room || 'Room 402, 2nd Floor';
@@ -119,10 +130,13 @@ export const PatientHeader: React.FC<PatientHeaderProps> = ({
       <div className="flex items-center gap-3">
         <button
           onClick={toggleSidebar}
-          className="p-2 rounded-xl text-[#24302F] bg-[#FAF7F0] hover:bg-[#E8D8B8]/60 border border-[#E8D8B8] lg:hidden cursor-pointer"
-          aria-label="Open Navigation Menu"
+          className="p-2 rounded-xl text-[#24302F] bg-[#FAF7F0] hover:bg-[#E8D8B8]/60 border border-[#E8D8B8] cursor-pointer shadow-2xs transition-colors"
+          aria-label="Toggle Navigation Sidebar"
+          title={isSidebarCollapsed ? 'Expand Sidebar' : 'Collapse / Menu'}
         >
-          <span className="material-symbols-outlined text-[20px]">menu</span>
+          <span className="material-symbols-outlined text-[20px]">
+            {isSidebarCollapsed ? 'menu_open' : 'menu'}
+          </span>
         </button>
 
         <div>

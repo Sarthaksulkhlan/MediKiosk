@@ -315,7 +315,12 @@ export const PatientDashboard: React.FC<PatientDashboardProps> = ({
         />
 
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col min-w-0">
+        <div
+          id="patient-main-container"
+          className={`flex-1 flex flex-col min-w-0 min-h-screen transition-all duration-300 ease-in-out ${
+            isSidebarCollapsed ? 'lg:pl-20' : 'lg:pl-64'
+          }`}
+        >
           {/* Header Bar */}
           <PatientHeader
             patient={patientData}
@@ -324,6 +329,8 @@ export const PatientDashboard: React.FC<PatientDashboardProps> = ({
             completedStepsCount={completedSteps.length}
             totalSteps={9}
             setCurrentView={setCurrentView}
+            isSidebarCollapsed={isSidebarCollapsed}
+            onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
             onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
           />
 

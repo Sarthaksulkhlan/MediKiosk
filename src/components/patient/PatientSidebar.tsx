@@ -109,16 +109,18 @@ export const PatientSidebar: React.FC<PatientSidebarProps> = ({
 
       {/* Sidebar Main Element */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 ${
-          isCollapsed ? 'w-[76px]' : 'w-[265px]'
-        } bg-[#FAF7F0] border-r border-[#E8D8B8]/80 flex flex-col justify-between transition-all duration-300 ease-in-out lg:translate-x-0 ${
-          isMobile ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
+        id="patient-sidebar"
+        className={`fixed top-0 bottom-0 left-0 h-screen z-40 bg-[#FAF7F0] border-r border-[#E8D8B8]/80 flex flex-col justify-between transition-all duration-300 ease-in-out ${
+          isCollapsed ? 'lg:w-20' : 'lg:w-64'
+        } w-64 max-w-[85vw] ${
+          isMobile ? 'translate-x-0 shadow-2xl z-50' : '-translate-x-full lg:translate-x-0'
         }`}
+        aria-label="Patient Navigation Sidebar"
       >
         {/* Top Branding & Profile Header */}
-        <div className="p-4 border-b border-[#E8D8B8]/70">
+        <div className="p-4 border-b border-[#E8D8B8]/70 flex-shrink-0">
           {/* Logo & Platform Name */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-1.5">
             <div className="flex items-center gap-2.5 min-w-0">
               <div className="w-10 h-10 rounded-xl bg-[#24302F] text-[#FAF7F0] flex items-center justify-center shadow-sm border border-[#D8BE88]/40 shrink-0">
                 <span className="material-symbols-outlined text-[#D8BE88] text-[22px]">
@@ -137,6 +139,20 @@ export const PatientSidebar: React.FC<PatientSidebarProps> = ({
                 </div>
               )}
             </div>
+
+            {/* Desktop Collapse Button */}
+            {setIsCollapsed && (
+              <button
+                onClick={() => setIsCollapsed(!isCollapsed)}
+                className="hidden lg:flex p-1.5 rounded-lg text-[#5D6662] hover:text-[#24302F] hover:bg-[#E8D8B8]/60 transition-colors cursor-pointer"
+                title={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+                aria-label={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+              >
+                <span className="material-symbols-outlined text-[20px]">
+                  {isCollapsed ? 'chevron_right' : 'chevron_left'}
+                </span>
+              </button>
+            )}
 
             {/* Mobile close button */}
             <button

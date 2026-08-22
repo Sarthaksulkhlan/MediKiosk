@@ -66,13 +66,15 @@ export default function App() {
       <AmbientShader opacity={0.45} />
 
       {/* Top Minimal Navbar */}
-      {currentView !== 'kiosk-mode' && currentView !== 'patient-dashboard' && (
-        <Navbar
-          currentView={currentView}
-          setCurrentView={setCurrentView}
-          onOpenGetStartedModal={() => setIsGetStartedOpen(true)}
-        />
-      )}
+      {currentView !== 'kiosk-mode' &&
+        currentView !== 'patient-dashboard' &&
+        currentView !== 'doctor-dashboard' && (
+          <Navbar
+            currentView={currentView}
+            setCurrentView={setCurrentView}
+            onOpenGetStartedModal={() => setIsGetStartedOpen(true)}
+          />
+        )}
 
       {/* Main View Transition Container */}
       <div className="flex-grow flex flex-col">
@@ -188,7 +190,9 @@ export default function App() {
       </AnimatePresence>
 
       {/* Footer */}
-      {currentView !== 'kiosk-mode' && currentView !== 'patient-dashboard' && <Footer />}
+      {currentView !== 'kiosk-mode' &&
+        currentView !== 'patient-dashboard' &&
+        currentView !== 'doctor-dashboard' && <Footer />}
     </div>
   );
 }
