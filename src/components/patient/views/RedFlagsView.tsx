@@ -28,27 +28,41 @@ export const RedFlagsView: React.FC<RedFlagsViewProps> = ({
   const defaultRiskItems: RiskItem[] = [
     {
       id: 'risk-1',
-      symptom: extracted.chiefComplaint !== 'No clinical complaint identified' ? extracted.chiefComplaint : 'Headache & Mild Pyrexia',
+      symptom:
+        extracted.chiefComplaint !== 'No clinical complaint identified'
+          ? extracted.chiefComplaint
+          : transcript.trim()
+          ? 'Mild / Non-specific Symptoms'
+          : 'No acute symptoms reported',
       severity: riskStatus === 'High Priority' ? 'High Priority' : 'Moderate',
       category: 'Primary Symptom',
-      recommendation: 'Evaluate in scheduled OPD slot with blood pressure & vital checks.',
+      recommendation: 'Evaluate in scheduled OPD slot with standard vitals check.',
       actionRequired: 'Clinical examination by physician',
     },
     {
       id: 'risk-2',
-      symptom: 'Duration: ' + (extracted.duration !== 'Not mentioned' ? extracted.duration : '2-3 Days'),
+      symptom:
+        'Duration: ' +
+        (extracted.duration !== 'Not mentioned'
+          ? extracted.duration
+          : transcript.trim()
+          ? 'Recent onset'
+          : 'Pending interview'),
       severity: 'Low',
       category: 'Onset Timeline',
       recommendation: 'Sub-acute timeframe; non-emergency baseline tracking recommended.',
-      actionRequired: 'Follow doctor prescription',
+      actionRequired: 'Standard OPD consultation',
     },
     {
       id: 'risk-3',
-      symptom: extracted.associatedSymptom !== 'None identified' ? extracted.associatedSymptom : 'No secondary distress detected',
+      symptom:
+        extracted.associatedSymptom !== 'None identified'
+          ? extracted.associatedSymptom
+          : 'No secondary emergency flags detected',
       severity: 'Low',
       category: 'Associated Factors',
-      recommendation: 'Hydration and rest advised prior to medical consult.',
-      actionRequired: 'Standard hydration',
+      recommendation: 'Standard hydration and rest advised prior to medical consult.',
+      actionRequired: 'Routine care protocol',
     },
   ];
 
@@ -76,7 +90,7 @@ export const RedFlagsView: React.FC<RedFlagsViewProps> = ({
       <div className="border-b border-[#E8D8B8]/70 pb-4">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold uppercase tracking-wider mb-2">
           <span className="material-symbols-outlined text-[15px]">emergency</span>
-          <span>Step 6 • Clinical Safety Stratification</span>
+          <span>Step 3 • Clinical Safety Stratification</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-[#24302F]">AI Risk Assessment</h1>
         <p className="text-sm text-[#5D6662] mt-1 max-w-3xl leading-relaxed">

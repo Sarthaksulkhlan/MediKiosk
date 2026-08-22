@@ -15,12 +15,9 @@ interface DashboardViewProps {
 }
 
 const WORKFLOW_STEPS: { id: PatientTab; label: string; icon: string }[] = [
-  { id: 'registration', label: 'Registration', icon: 'badge' },
   { id: 'consent', label: 'Consent', icon: 'verified_user' },
-  { id: 'language', label: 'Language', icon: 'translate' },
-  { id: 'healthcare-system', label: 'Approach', icon: 'local_hospital' },
-  { id: 'ai-interview', label: 'AI Interview', icon: 'smart_toy' },
-  { id: 'red-flags', label: 'Risk Flags', icon: 'emergency' },
+  { id: 'ai-interview', label: 'AI Voice Interview', icon: 'smart_toy' },
+  { id: 'red-flags', label: 'Red Flags', icon: 'emergency' },
   { id: 'reports', label: 'Scan Reports', icon: 'description' },
   { id: 'review', label: 'Review', icon: 'search_check' },
   { id: 'submit', label: 'Submit', icon: 'send' },
@@ -142,7 +139,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Health Assessment */}
         <div
-          onClick={() => setActiveTab('registration')}
+          onClick={() => setActiveTab(nextStep.id)}
           className="p-5 rounded-2xl bg-white border border-[#E8D8B8]/80 hover:border-[#B89A5A] transition-all cursor-pointer shadow-xs hover:shadow-md group flex flex-col justify-between"
         >
           <div className="flex items-start justify-between">
@@ -259,7 +256,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </p>
           </div>
           <span className="text-xs font-bold text-[#8C6B28] bg-[#FAF7F0] px-3 py-1 rounded-full border border-[#E8D8B8]">
-            {stepsList.length} of {WORKFLOW_STEPS.length} Milestones Done
+            {WORKFLOW_STEPS.filter((s) => isStepDone(s.id)).length} of {WORKFLOW_STEPS.length} Milestones Done
           </span>
         </div>
 

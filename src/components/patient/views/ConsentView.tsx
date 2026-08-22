@@ -33,7 +33,7 @@ export const ConsentView: React.FC<ConsentViewProps> = ({
     };
     onUpdateConsent(updated);
     onMarkStepComplete('consent');
-    setActiveTab('language');
+    setActiveTab('ai-interview');
   };
 
   const consentCards = [
@@ -82,7 +82,7 @@ export const ConsentView: React.FC<ConsentViewProps> = ({
       <div className="border-b border-[#E8D8B8]/70 pb-4">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#B89A5A]/15 text-[#8C6B28] text-xs font-bold uppercase tracking-wider mb-2">
           <span className="material-symbols-outlined text-[15px]">verified_user</span>
-          <span>Step 2 • Patient Consent</span>
+          <span>Step 1 • Patient Consent</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-[#24302F]">Your Consent Matters</h1>
         <p className="text-sm text-[#5D6662] mt-1 max-w-3xl leading-relaxed">
@@ -191,8 +191,8 @@ export const ConsentView: React.FC<ConsentViewProps> = ({
       {/* Bottom CTA Bar */}
       <div className="p-4 rounded-2xl bg-white border border-[#E8D8B8]/80 shadow-xs flex items-center justify-between">
         <button
-          onClick={() => setActiveTab('registration')}
-          className="text-xs font-bold text-[#5D6662] hover:text-[#24302F] px-4 py-2"
+          onClick={() => setActiveTab('dashboard')}
+          className="text-xs font-bold text-[#5D6662] hover:text-[#24302F] px-4 py-2 cursor-pointer"
         >
           ← Back
         </button>

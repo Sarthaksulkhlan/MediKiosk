@@ -41,9 +41,7 @@ export const KioskIntakeMode: React.FC<KioskIntakeModeProps> = ({
   const [patientGender, setPatientGender] = useState<'Female' | 'Male' | 'Other'>('Female');
   const [isRecording, setIsRecording] = useState(false);
   const [interimText, setInterimText] = useState('');
-  const [spokenNarrative, setSpokenNarrative] = useState(
-    'I have had a high fever for three days with persistent headache and morning body ache.'
-  );
+  const [spokenNarrative, setSpokenNarrative] = useState('');
   const [vitalsProgress, setVitalsProgress] = useState(0);
   const [tokenNumber, setTokenNumber] = useState('MK-6420D');
 
@@ -74,7 +72,7 @@ export const KioskIntakeMode: React.FC<KioskIntakeModeProps> = ({
             setInterimText('');
           },
         },
-        spokenNarrative
+        ''
       );
 
       if (!started && !speechService.isSupported()) {

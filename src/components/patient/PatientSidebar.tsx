@@ -28,16 +28,12 @@ interface NavItemDef {
 
 const MAIN_NAV_ITEMS: NavItemDef[] = [
   { id: 'dashboard', label: 'Dashboard', icon: 'space_dashboard' },
-  { id: 'profile', label: 'Patient Profile', icon: 'account_circle' },
-  { id: 'registration', label: 'ABHA / Registration', icon: 'badge', workflowStep: 1 },
-  { id: 'consent', label: 'Consent', icon: 'verified_user', workflowStep: 2 },
-  { id: 'language', label: 'Language', icon: 'translate', workflowStep: 3 },
-  { id: 'healthcare-system', label: 'Healthcare System', icon: 'local_hospital', workflowStep: 4 },
-  { id: 'ai-interview', label: 'AI Voice Interview', icon: 'smart_toy', workflowStep: 5, badge: 'Live AI' },
-  { id: 'red-flags', label: 'Red Flag Detection', icon: 'emergency', workflowStep: 6 },
-  { id: 'reports', label: 'Scan Reports', icon: 'description', workflowStep: 7 },
-  { id: 'review', label: 'Review Information', icon: 'search_check', workflowStep: 8 },
-  { id: 'submit', label: 'Submit', icon: 'send', workflowStep: 9, badge: 'Final' },
+  { id: 'consent', label: 'Consent', icon: 'verified_user', workflowStep: 1 },
+  { id: 'ai-interview', label: 'AI Voice Interview', icon: 'smart_toy', workflowStep: 2, badge: 'Live AI' },
+  { id: 'red-flags', label: 'Red Flag Detection', icon: 'emergency', workflowStep: 3 },
+  { id: 'reports', label: 'Scan Reports', icon: 'description', workflowStep: 4 },
+  { id: 'review', label: 'Review Information', icon: 'search_check', workflowStep: 5 },
+  { id: 'submit', label: 'Submit', icon: 'send', workflowStep: 6, badge: 'Final' },
 ];
 
 export const PatientSidebar: React.FC<PatientSidebarProps> = ({
@@ -121,8 +117,12 @@ export const PatientSidebar: React.FC<PatientSidebarProps> = ({
         <div className="p-4 border-b border-[#E8D8B8]/70 flex-shrink-0">
           {/* Logo & Platform Name */}
           <div className="flex items-center justify-between gap-1.5">
-            <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-10 h-10 rounded-xl bg-[#24302F] text-[#FAF7F0] flex items-center justify-center shadow-sm border border-[#D8BE88]/40 shrink-0">
+            <button
+              onClick={() => setCurrentView('landing')}
+              className="flex items-center gap-2.5 min-w-0 text-left group cursor-pointer"
+              title="Return to MediKiosk Hub"
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#24302F] text-[#FAF7F0] flex items-center justify-center shadow-sm border border-[#D8BE88]/40 shrink-0 group-hover:scale-105 transition-transform">
                 <span className="material-symbols-outlined text-[#D8BE88] text-[22px]">
                   health_and_safety
                 </span>
@@ -130,15 +130,15 @@ export const PatientSidebar: React.FC<PatientSidebarProps> = ({
               {!isCollapsed && (
                 <div className="min-w-0">
                   <h1 className="text-base font-extrabold text-[#24302F] tracking-tight flex items-center gap-1">
-                    <span>HealthBridge</span>
+                    <span>Medi<span className="text-[#B89A5A]">Kiosk</span></span>
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
                   </h1>
                   <p className="text-[11px] font-medium text-[#7B8580] tracking-tight truncate">
-                    AI-Powered Healthcare
+                    Patient Intake Portal
                   </p>
                 </div>
               )}
-            </div>
+            </button>
 
             {/* Desktop Collapse Button */}
             {setIsCollapsed && (

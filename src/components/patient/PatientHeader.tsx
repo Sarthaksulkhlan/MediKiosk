@@ -68,7 +68,7 @@ export const PatientHeader: React.FC<PatientHeaderProps> = ({
   isSidebarCollapsed = false,
   onToggleCollapse,
   completedStepsCount = 0,
-  totalSteps = 9,
+  totalSteps = 6,
   setCurrentView = (_view: AppView) => {},
 }) => {
   const [isNotifOpen, setIsNotifOpen] = useState(false);

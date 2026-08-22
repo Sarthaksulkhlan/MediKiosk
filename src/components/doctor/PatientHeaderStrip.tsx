@@ -59,6 +59,19 @@ export const PatientHeaderStrip: React.FC<PatientHeaderStripProps> = ({
                 {patient.language} ({patient.languageCode})
               </span>
 
+              {patient.carePreference && (
+                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 border ${
+                  patient.carePreference.includes('AYUSH')
+                    ? 'bg-amber-50 text-amber-900 border-amber-300'
+                    : 'bg-teal-50 text-teal-900 border-teal-300'
+                }`}>
+                  <span className="material-symbols-outlined text-[13px]">
+                    {patient.carePreference.includes('AYUSH') ? 'spa' : 'medical_services'}
+                  </span>
+                  {patient.carePreference}
+                </span>
+              )}
+
               {isSigned && (
                 <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300 flex items-center gap-1">
                   <span className="material-symbols-outlined text-[13px]">verified</span>

@@ -67,6 +67,19 @@ export interface AyushProfile {
   notes?: string;
 }
 
+export type PatientWorkflowStep =
+  | 'welcome'
+  | 'registration'
+  | 'consent'
+  | 'language'
+  | 'care-preference'
+  | 'voice-interview'
+  | 'aura-ai'
+  | 'red-flags'
+  | 'scan-reports'
+  | 'review-info'
+  | 'submit';
+
 export interface PatientRecord {
   id: string;
   name: string;
@@ -74,6 +87,11 @@ export interface PatientRecord {
   gender: 'Female' | 'Male' | 'Other';
   patientId: string;
   avatar?: string;
+  abhaNumber?: string;
+  carePreference?: 'Modern Medicine' | 'AYUSH / Ayurveda';
+  consentGiven?: boolean;
+  consentTimestamp?: string;
+  redFlagsDetected?: string[];
   chiefComplaint: string;
   language: string;
   languageCode: 'EN' | 'HI';

@@ -47,7 +47,7 @@ export const ReviewView: React.FC<ReviewViewProps> = ({
       <div className="border-b border-[#E8D8B8]/70 pb-4">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#B89A5A]/15 text-[#8C6B28] text-xs font-bold uppercase tracking-wider mb-2">
           <span className="material-symbols-outlined text-[15px]">search_check</span>
-          <span>Step 8 • Clinical Verification</span>
+          <span>Step 5 • Clinical Verification</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-[#24302F]">
           Review Your Information

@@ -41,10 +41,7 @@ export const PatientDashboard: React.FC<PatientDashboardProps> = ({
 
   // Completed Step Tracker
   const [completedSteps, setCompletedSteps] = useState<PatientTab[]>([
-    'registration',
     'consent',
-    'language',
-    'healthcare-system',
   ]);
 
   // Central Patient Profile State
@@ -91,9 +88,7 @@ export const PatientDashboard: React.FC<PatientDashboardProps> = ({
   });
 
   // Voice Interview & Clinical State
-  const [transcript, setTranscript] = useState(
-    'I have had fever for three days and headache since yesterday evening.'
-  );
+  const [transcript, setTranscript] = useState('');
   const [riskStatus, setRiskStatus] = useState<'Low Risk' | 'Moderate Risk' | 'High Priority'>(
     'Low Risk'
   );
@@ -327,7 +322,7 @@ export const PatientDashboard: React.FC<PatientDashboardProps> = ({
             activeTab={activeTab}
             setActiveTab={setActiveTab}
             completedStepsCount={completedSteps.length}
-            totalSteps={9}
+            totalSteps={6}
             setCurrentView={setCurrentView}
             isSidebarCollapsed={isSidebarCollapsed}
             onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}

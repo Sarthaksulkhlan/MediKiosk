@@ -71,6 +71,8 @@ export const VoiceInterviewView: React.FC<VoiceInterviewViewProps> = ({
             if (finalText) {
               setInputText(finalText);
               handleSendMessage(finalText);
+              speechService.stop();
+              setIsListening(false);
             } else if (interimText) {
               setInputText(interimText);
             }
@@ -83,19 +85,11 @@ export const VoiceInterviewView: React.FC<VoiceInterviewViewProps> = ({
             setIsListening(false);
           },
         },
-        transcript
+        ''
       );
 
       if (!started) {
-        // Fallback simulation if speech recognition is blocked
-        setIsListening(true);
-        setTimeout(() => {
-          const sampleText = isHindi
-            ? 'मुझे दो दिन से तेज सिरदर्द और उल्टी जैसी लग रही है'
-            : 'I have severe throbbing headache on my forehead since 2 days';
-          setInputText(sampleText);
-          setIsListening(false);
-        }, 2000);
+        setIsListening(false);
       }
     }
   };
@@ -182,7 +176,7 @@ export const VoiceInterviewView: React.FC<VoiceInterviewViewProps> = ({
       <div className="border-b border-[#E8D8B8]/70 pb-4">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#B89A5A]/15 text-[#8C6B28] text-xs font-bold uppercase tracking-wider mb-2">
           <span className="material-symbols-outlined text-[15px]">smart_toy</span>
-          <span>Step 5 • AI Voice Intake</span>
+          <span>Step 2 • AI Voice Interview</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-[#24302F]">AI Health Interview</h1>
         <p className="text-sm text-[#5D6662] mt-1 max-w-3xl leading-relaxed">
@@ -248,11 +242,24 @@ export const VoiceInterviewView: React.FC<VoiceInterviewViewProps> = ({
 
             <div className="flex items-center gap-2">
               <button
-                onClick={() => setMessages(AuraAIEngine.generateInitialGreeting(patient.name, '', extractedEntities, langCode))}
-                title="Restart conversation"
-                className="p-1.5 rounded-lg text-[#6B7570] hover:bg-[#E8D8B8]/50"
+                onClick={() => {
+                  onUpdateTranscript('');
+                  setMessages(
+                    AuraAIEngine.generateInitialGreeting(
+                      patient.name,
+                      '',
+                      { chiefComplaint: 'No clinical complaint identified', duration: 'Not mentioned', associatedSymptom: 'None identified' },
+                      langCode
+                    )
+                  );
+                  setCurrentStepIndex(1);
+                  setIsInterviewFinished(false);
+                }}
+                title="Restart conversation and clear speech history"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-[#6B7570] hover:text-[#24302F] hover:bg-[#E8D8B8]/50 border border-[#E8D8B8] cursor-pointer"
               >
-                <span className="material-symbols-outlined text-[18px]">restart_alt</span>
+                <span className="material-symbols-outlined text-[16px]">restart_alt</span>
+                <span>Reset</span>
               </button>
             </div>
           </div>
@@ -458,8 +465,8 @@ export const VoiceInterviewView: React.FC<VoiceInterviewViewProps> = ({
       {/* Bottom CTA Bar */}
       <div className="p-4 rounded-2xl bg-white border border-[#E8D8B8]/80 shadow-xs flex items-center justify-between">
         <button
-          onClick={() => setActiveTab('healthcare-system')}
-          className="text-xs font-bold text-[#5D6662] hover:text-[#24302F] px-4 py-2"
+          onClick={() => setActiveTab('consent')}
+          className="text-xs font-bold text-[#5D6662] hover:text-[#24302F] px-4 py-2 cursor-pointer"
         >
           ← Back
         </button>
