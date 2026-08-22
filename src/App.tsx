@@ -66,7 +66,7 @@ export default function App() {
       <AmbientShader opacity={0.45} />
 
       {/* Top Minimal Navbar */}
-      {currentView !== 'kiosk-mode' && currentView !== 'doctor-dashboard' && (
+      {currentView !== 'kiosk-mode' && currentView !== 'patient-dashboard' && (
         <Navbar
           currentView={currentView}
           setCurrentView={setCurrentView}
@@ -188,7 +188,7 @@ export default function App() {
       </AnimatePresence>
 
       {/* Footer */}
-      {currentView !== 'kiosk-mode' && currentView !== 'doctor-dashboard' && <Footer />}
+      {currentView !== 'kiosk-mode' && currentView !== 'patient-dashboard' && <Footer />}
     </div>
   );
 }

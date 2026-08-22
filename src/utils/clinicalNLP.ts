@@ -299,3 +299,26 @@ export function extractClinicalEntities(
     associatedSymptom,
   };
 }
+
+export class ClinicalNLPParser {
+  static extractEntities(text: string) {
+    const res = extractClinicalEntities(text);
+    const lower = (text || '').toLowerCase();
+    const flags: string[] = [];
+
+    if (lower.includes('chest') || lower.includes('heart') || lower.includes('छाती')) {
+      flags.push('Chest Pain / Pressure');
+    }
+    if (lower.includes('breath') || lower.includes('shortness') || lower.includes('सांस')) {
+      flags.push('Acute Dyspnea / Shortness of Breath');
+    }
+    if (lower.includes('bleed') || lower.includes('खून')) {
+      flags.push('Unexplained Bleeding');
+    }
+
+    return {
+      ...res,
+      redFlagsIdentified: flags,
+    };
+  }
+}

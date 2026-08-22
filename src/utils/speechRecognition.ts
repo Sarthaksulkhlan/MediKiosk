@@ -142,4 +142,5 @@ export class SpeechRecognitionService {
 
 // Global Singleton for easy app-wide reuse
 export const speechService = new SpeechRecognitionService();
+export const SpeechRecognitionManager = SpeechRecognitionService;
 
