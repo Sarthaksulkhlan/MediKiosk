@@ -59,32 +59,24 @@ export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({
       description: 'High fever, BP & triage flags',
     },
     {
-      id: 'ai-summary',
-      number: 3,
-      label: 'AI Patient Summary',
-      shortLabel: 'AI Summary',
-      icon: 'auto_awesome',
-      description: 'SOAP & translated clinical draft',
-    },
-    {
-      id: 'medical-timeline',
-      number: 4,
-      label: 'Medical Timeline',
-      shortLabel: 'Timeline',
-      icon: 'timeline',
-      description: 'Longitudinal clinical history',
-    },
-    {
       id: 'reports',
-      number: 5,
+      number: 3,
       label: 'Reports & OCR',
       shortLabel: 'Reports',
       icon: 'folder_shared',
       description: 'Prescriptions, labs & diagnostics',
     },
     {
+      id: 'ai-summary',
+      number: 4,
+      label: 'AI Patient Summary',
+      shortLabel: 'AI Summary',
+      icon: 'auto_awesome',
+      description: 'SOAP & translated clinical draft',
+    },
+    {
       id: 'ayush-assessment',
-      number: 6,
+      number: 5,
       label: 'AYUSH Assessment',
       shortLabel: 'AYUSH',
       icon: 'spa',
@@ -92,11 +84,21 @@ export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({
     },
     {
       id: 'doctor-edit',
-      number: 7,
-      label: 'Doctor Edit & Confirm',
-      shortLabel: 'Edit Orders',
+      number: 6,
+      label: 'Prescription by Doctor',
+      shortLabel: 'Prescription',
       icon: 'edit_note',
       description: 'Prescription & clinical orders',
+    },
+    {
+      id: 'patient-report',
+      number: 7,
+      label: 'Patient Report',
+      shortLabel: 'Report',
+      icon: 'summarize',
+      badge: 1,
+      badgeColor: 'bg-[#B89A5A] text-[#1B2423] font-extrabold',
+      description: 'Consolidated clinical dossier',
     },
     {
       id: 'consultation',
@@ -252,6 +254,7 @@ export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({
 
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
+            const isReport = item.id === 'patient-report';
 
             return (
               <button
@@ -263,7 +266,11 @@ export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({
                   isCollapsed ? 'justify-center p-2.5' : 'justify-between p-2.5 sm:p-3'
                 } ${
                   isActive
-                    ? 'bg-[#24302F] text-[#FAF7F0] shadow-md shadow-[#24302F]/10'
+                    ? isReport
+                      ? 'bg-[#24302F] text-[#FAF7F0] shadow-md ring-2 ring-[#B89A5A]/50'
+                      : 'bg-[#24302F] text-[#FAF7F0] shadow-md shadow-[#24302F]/10'
+                    : isReport
+                    ? 'bg-amber-50/80 hover:bg-amber-100/80 text-[#24302F] border border-[#D8BE88]/80 shadow-2xs'
                     : 'bg-[#FAF7F0]/60 hover:bg-[#F3EBDD] text-[#24302F] border border-transparent hover:border-[#E8D8B8]'
                 }`}
               >
@@ -273,6 +280,8 @@ export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({
                     className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors relative ${
                       isActive
                         ? 'bg-[#D8BE88]/20 text-[#D8BE88]'
+                        : isReport
+                        ? 'bg-[#B89A5A] text-[#1B2423] shadow-xs'
                         : 'bg-white text-[#B89A5A] group-hover:bg-[#FAF7F0] border border-[#E8D8B8]/60'
                     }`}
                   >
@@ -298,18 +307,18 @@ export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({
                       <div className="flex items-center gap-1.5">
                         <span
                           className={`text-[10px] font-mono font-bold ${
-                            isActive ? 'text-[#D8BE88]' : 'text-[#73787A]'
+                            isActive ? 'text-[#D8BE88]' : isReport ? 'text-[#8C6B28]' : 'text-[#73787A]'
                           }`}
                         >
                           {item.number}.
                         </span>
-                        <span className="text-xs font-bold truncate">
+                        <span className={`text-xs font-bold truncate ${isReport && !isActive ? 'text-[#1B2423]' : ''}`}>
                           {item.label}
                         </span>
                       </div>
                       <p
                         className={`text-[10px] truncate ${
-                          isActive ? 'text-[#FAF7F0]/70' : 'text-[#73787A]'
+                          isActive ? 'text-[#FAF7F0]/70' : isReport ? 'text-[#8C6B28]' : 'text-[#73787A]'
                         }`}
                       >
                         {item.description}

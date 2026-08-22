@@ -8,6 +8,7 @@ export type PatientTab =
   | 'ai-interview'
   | 'red-flags'
   | 'reports'
+  | 'doctor-advice'
   | 'review'
   | 'submit'
   | 'settings'

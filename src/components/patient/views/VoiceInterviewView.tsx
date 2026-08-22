@@ -22,13 +22,27 @@ export const VoiceInterviewView: React.FC<VoiceInterviewViewProps> = ({
   onMarkStepComplete,
   selectedLanguage,
 }) => {
-  const isHindi = selectedLanguage.toLowerCase().includes('hindi') || selectedLanguage.toLowerCase().includes('हिंदी');
-  const langCode: SupportedLanguage = isHindi ? 'HI' : 'EN';
+  const initialIsHindi =
+    selectedLanguage.toLowerCase().includes('hindi') ||
+    selectedLanguage.toLowerCase().includes('हिंदी') ||
+    selectedLanguage === 'HI';
 
-  // Chat conversation state
+  const [activeLang, setActiveLang] = useState<'EN' | 'HI'>(initialIsHindi ? 'HI' : 'EN');
+  const isHindi = activeLang === 'HI';
+  const langCode: SupportedLanguage = activeLang;
+
+  // Chat conversation state: strictly starts with a clean greeting asking the patient for their symptoms
   const [messages, setMessages] = useState<AuraMessage[]>(() => {
-    const extracted = ClinicalNLPParser.extractEntities(transcript);
-    return AuraAIEngine.generateInitialGreeting(patient.name, transcript, extracted, langCode);
+    return AuraAIEngine.generateInitialGreeting(
+      patient.name,
+      '',
+      {
+        chiefComplaint: 'No clinical complaint identified',
+        duration: 'Not mentioned',
+        associatedSymptom: 'None identified',
+      },
+      initialIsHindi ? 'HI' : 'EN'
+    );
   });
 
   const [inputText, setInputText] = useState('');
@@ -40,7 +54,7 @@ export const VoiceInterviewView: React.FC<VoiceInterviewViewProps> = ({
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Parse clinical entities live
+  // Parse clinical entities live from current transcript
   const extractedEntities = ClinicalNLPParser.extractEntities(transcript);
 
   useEffect(() => {
@@ -54,6 +68,25 @@ export const VoiceInterviewView: React.FC<VoiceInterviewViewProps> = ({
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  const handleLanguageSwitch = (newLang: 'EN' | 'HI') => {
+    setActiveLang(newLang);
+    // If only initial greeting exists, refresh greeting in new language
+    if (messages.length <= 2 && messages.every((m) => m.sender === 'aura')) {
+      setMessages(
+        AuraAIEngine.generateInitialGreeting(
+          patient.name,
+          '',
+          {
+            chiefComplaint: 'No clinical complaint identified',
+            duration: 'Not mentioned',
+            associatedSymptom: 'None identified',
+          },
+          newLang
+        )
+      );
+    }
+  };
 
   const toggleListening = () => {
     if (isListening) {
@@ -160,6 +193,25 @@ export const VoiceInterviewView: React.FC<VoiceInterviewViewProps> = ({
     }
   };
 
+  const handleReset = () => {
+    onUpdateTranscript('');
+    setInputText('');
+    setMessages(
+      AuraAIEngine.generateInitialGreeting(
+        patient.name,
+        '',
+        {
+          chiefComplaint: 'No clinical complaint identified',
+          duration: 'Not mentioned',
+          associatedSymptom: 'None identified',
+        },
+        langCode
+      )
+    );
+    setCurrentStepIndex(1);
+    setIsInterviewFinished(false);
+  };
+
   const handleFinishAndProceed = () => {
     onMarkStepComplete('ai-interview');
     setActiveTab('red-flags');
@@ -241,25 +293,39 @@ export const VoiceInterviewView: React.FC<VoiceInterviewViewProps> = ({
             </div>
 
             <div className="flex items-center gap-2">
+              {/* Language Switcher Pill */}
+              <div className="flex items-center bg-white rounded-xl border border-[#E8D8B8] p-0.5 shadow-2xs">
+                <button
+                  onClick={() => handleLanguageSwitch('EN')}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    activeLang === 'EN'
+                      ? 'bg-[#24302F] text-[#FAF7F0] shadow-xs'
+                      : 'text-[#5D6662] hover:text-[#24302F]'
+                  }`}
+                  title="Switch to English"
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => handleLanguageSwitch('HI')}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    activeLang === 'HI'
+                      ? 'bg-[#24302F] text-[#FAF7F0] shadow-xs'
+                      : 'text-[#5D6662] hover:text-[#24302F]'
+                  }`}
+                  title="हिंदी में बदलें (Switch to Hindi)"
+                >
+                  HI (हिन्दी)
+                </button>
+              </div>
+
               <button
-                onClick={() => {
-                  onUpdateTranscript('');
-                  setMessages(
-                    AuraAIEngine.generateInitialGreeting(
-                      patient.name,
-                      '',
-                      { chiefComplaint: 'No clinical complaint identified', duration: 'Not mentioned', associatedSymptom: 'None identified' },
-                      langCode
-                    )
-                  );
-                  setCurrentStepIndex(1);
-                  setIsInterviewFinished(false);
-                }}
+                onClick={handleReset}
                 title="Restart conversation and clear speech history"
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-[#6B7570] hover:text-[#24302F] hover:bg-[#E8D8B8]/50 border border-[#E8D8B8] cursor-pointer"
+                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold text-[#6B7570] hover:text-[#24302F] hover:bg-[#E8D8B8]/50 border border-[#E8D8B8] cursor-pointer shadow-2xs"
               >
                 <span className="material-symbols-outlined text-[16px]">restart_alt</span>
-                <span>Reset</span>
+                <span className="hidden sm:inline">Reset</span>
               </button>
             </div>
           </div>

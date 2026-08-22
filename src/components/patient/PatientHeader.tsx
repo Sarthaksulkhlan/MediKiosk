@@ -27,6 +27,7 @@ const TAB_TITLES: Record<PatientTab, { title: string; breadcrumb: string }> = {
   'ai-interview': { title: 'Aura AI Voice Health Interview', breadcrumb: 'AI Voice Interview' },
   'red-flags': { title: 'AI Risk Stratification & Red Flags', breadcrumb: 'Red Flag Detection' },
   reports: { title: 'Upload & Scan Medical Documents', breadcrumb: 'Scan Reports' },
+  'doctor-advice': { title: "Doctor's Advice & Prescription Report", breadcrumb: "Doctor's Advice" },
   review: { title: 'Clinical Information Review', breadcrumb: 'Review Information' },
   submit: { title: 'Final Submission & Token Generation', breadcrumb: 'Submit' },
   settings: { title: 'Account & Security Preferences', breadcrumb: 'Settings' },

@@ -109,6 +109,19 @@ const TARGETED_QUESTIONS: Record<
       return null;
     },
   },
+  'Leg pain / Cramps': {
+    locationQuestionEN: 'Where exactly is the cramp or pain located (e.g. left calf, right thigh, knee, or both legs)?',
+    locationQuestionHI: 'ऐंठन या दर्द ठीक किस जगह है (जैसे बाईं पिंडली, दाईं जांघ, घुटना या दोनों पैरों में)?',
+    associatedPromptEN: 'Does the pain worsen during walking or at night, and have you noticed any swelling, redness, or warmth in the leg?',
+    associatedPromptHI: 'क्या चलने पर या रात को दर्द बढ़ता है, और क्या आपको पैर में कोई सूजन, लालिमा या गर्माहट महसूस हुई है?',
+    redFlagCheck: (t) => {
+      const lower = t.toLowerCase();
+      if (lower.includes('deep vein') || lower.includes('dvt') || lower.includes('severe swelling in one leg') || lower.includes('red and hot') || lower.includes('एक पैर में तेज सूजन')) {
+        return 'Unilateral acute leg swelling / potential DVT indicator';
+      }
+      return null;
+    },
+  },
 };
 
 export class AuraAIEngine {

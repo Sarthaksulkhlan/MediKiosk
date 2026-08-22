@@ -34,6 +34,7 @@ const MAIN_NAV_ITEMS: NavItemDef[] = [
   { id: 'reports', label: 'Scan Reports', icon: 'description', workflowStep: 4 },
   { id: 'review', label: 'Review Information', icon: 'search_check', workflowStep: 5 },
   { id: 'submit', label: 'Submit', icon: 'send', workflowStep: 6, badge: 'Final' },
+  { id: 'doctor-advice', label: "Doctor's Advice Report", icon: 'stars', badge: 'Official Advice' },
 ];
 
 export const PatientSidebar: React.FC<PatientSidebarProps> = ({
@@ -217,6 +218,7 @@ export const PatientSidebar: React.FC<PatientSidebarProps> = ({
           {MAIN_NAV_ITEMS.map((item) => {
             const isActive = activeTab === item.id;
             const isDone = stepsList.includes(item.id);
+            const isAdviceReport = item.id === 'doctor-advice';
 
             return (
               <button
@@ -230,7 +232,9 @@ export const PatientSidebar: React.FC<PatientSidebarProps> = ({
                   isCollapsed ? 'justify-center p-2.5' : 'justify-between px-3 py-2.5'
                 } rounded-xl text-xs font-semibold transition-all cursor-pointer group ${
                   isActive
-                    ? 'bg-[#24302F] text-[#FAF7F0] shadow-sm font-bold'
+                    ? 'bg-[#24302F] text-[#FAF7F0] shadow-sm font-bold ring-1 ring-[#B89A5A]/50'
+                    : isAdviceReport
+                    ? 'bg-amber-50/90 text-[#24302F] border border-[#D8BE88] font-bold shadow-2xs hover:bg-amber-100/90'
                     : 'text-[#4D5652] hover:bg-[#F0E6D2]/80 hover:text-[#24302F]'
                 }`}
               >
@@ -239,6 +243,8 @@ export const PatientSidebar: React.FC<PatientSidebarProps> = ({
                     className={`material-symbols-outlined text-[18px] transition-colors ${
                       isActive
                         ? 'text-[#D8BE88]'
+                        : isAdviceReport
+                        ? 'text-[#B89A5A]'
                         : isDone
                         ? 'text-emerald-600'
                         : 'text-[#7B8580] group-hover:text-[#24302F]'
@@ -246,7 +252,11 @@ export const PatientSidebar: React.FC<PatientSidebarProps> = ({
                   >
                     {item.icon}
                   </span>
-                  {!isCollapsed && <span className="truncate">{item.label}</span>}
+                  {!isCollapsed && (
+                    <span className={`truncate ${isAdviceReport && !isActive ? 'text-[#8C6B28]' : ''}`}>
+                      {item.label}
+                    </span>
+                  )}
                 </div>
 
                 {!isCollapsed && (
@@ -255,6 +265,8 @@ export const PatientSidebar: React.FC<PatientSidebarProps> = ({
                       <span
                         className={`text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded-full ${
                           isActive
+                            ? 'bg-[#B89A5A] text-[#1B2423]'
+                            : isAdviceReport
                             ? 'bg-[#B89A5A] text-[#1B2423]'
                             : 'bg-[#E8D8B8] text-[#4D5652]'
                         }`}

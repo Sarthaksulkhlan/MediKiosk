@@ -125,6 +125,7 @@ export default function App() {
               <PatientDashboard
                 setCurrentView={setCurrentView}
                 onNewCaseSubmitted={handleNewCaseSubmitted}
+                activePatientRecord={patients.find((p) => p.name.includes('Eleanor') || p.id === 'pat-1') || selectedPatient}
               />
             </motion.div>
           )}

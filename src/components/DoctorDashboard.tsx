@@ -7,10 +7,10 @@ import { PatientHeaderStrip } from './doctor/PatientHeaderStrip';
 import { PatientQueueSection } from './doctor/PatientQueueSection';
 import { PriorityCasesSection } from './doctor/PriorityCasesSection';
 import { AISummarySection } from './doctor/AISummarySection';
-import { MedicalTimelineSection } from './doctor/MedicalTimelineSection';
 import { ReportsSection } from './doctor/ReportsSection';
 import { AyushAssessmentSection } from './doctor/AyushAssessmentSection';
 import { DoctorEditSection } from './doctor/DoctorEditSection';
+import { PatientReportSection } from './doctor/PatientReportSection';
 import { ConsultationSection } from './doctor/ConsultationSection';
 
 interface DoctorDashboardProps {
@@ -220,7 +220,12 @@ export const DoctorDashboard: React.FC<DoctorDashboardProps> = ({
                 />
               )}
 
-              {/* 3. AI Patient Summary */}
+              {/* 3. Reports & OCR */}
+              {activeSection === 'reports' && (
+                <ReportsSection patient={currentPatient} />
+              )}
+
+              {/* 4. AI Patient Summary */}
               {activeSection === 'ai-summary' && (
                 <AISummarySection
                   patient={currentPatient}
@@ -228,17 +233,7 @@ export const DoctorDashboard: React.FC<DoctorDashboardProps> = ({
                 />
               )}
 
-              {/* 4. Medical Timeline */}
-              {activeSection === 'medical-timeline' && (
-                <MedicalTimelineSection patient={currentPatient} />
-              )}
-
-              {/* 5. Reports & OCR */}
-              {activeSection === 'reports' && (
-                <ReportsSection patient={currentPatient} />
-              )}
-
-              {/* 6. AYUSH Assessment */}
+              {/* 5. AYUSH Assessment */}
               {activeSection === 'ayush-assessment' && (
                 <AyushAssessmentSection
                   patient={currentPatient}
@@ -246,13 +241,22 @@ export const DoctorDashboard: React.FC<DoctorDashboardProps> = ({
                 />
               )}
 
-              {/* 7. Doctor Edit & Confirm */}
+              {/* 6. Prescription by Doctor */}
               {activeSection === 'doctor-edit' && (
                 <DoctorEditSection
                   patient={currentPatient}
                   onUpdatePatient={handleUpdatePatient}
                   isSigned={isCurrentSigned}
                   onSign={handleSign}
+                />
+              )}
+
+              {/* 7. Patient Report */}
+              {activeSection === 'patient-report' && (
+                <PatientReportSection
+                  patient={currentPatient}
+                  onNavigateSection={(sec) => setActiveSection(sec)}
+                  isSigned={isCurrentSigned}
                 />
               )}
 

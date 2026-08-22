@@ -86,7 +86,6 @@ export const KioskIntakeMode: React.FC<KioskIntakeModeProps> = ({
 
   const handleSelectLanguage = (lang: typeof LANGUAGES[0]) => {
     setSelectedLang(lang);
-    setSpokenNarrative(lang.sample);
   };
 
   const handleRunVitalsScan = () => {

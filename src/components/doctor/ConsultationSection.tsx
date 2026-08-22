@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PatientRecord, DoctorSection } from '../../types';
+import { speechService, SupportedLanguage } from '../../utils/speechRecognition';
 
 interface ConsultationSectionProps {
   patient: PatientRecord;
@@ -17,46 +18,33 @@ export const ConsultationSection: React.FC<ConsultationSectionProps> = ({
   const [consultNotes, setConsultNotes] = useState<string>(
     `Consultation initiated with ${patient.name} (${patient.patientId}). Patient evaluated for ${patient.chiefComplaint}.`
   );
+  const [interimText, setInterimText] = useState<string>('');
+  const [selectedLang, setSelectedLang] = useState<SupportedLanguage>('EN');
   const [isRecording, setIsRecording] = useState(false);
-  const [speechSupported, setSpeechSupported] = useState(false);
+  const [speechSupported, setSpeechSupported] = useState(true);
   const [callStatus, setCallStatus] = useState<'idle' | 'calling' | 'in-room'>('in-room');
-  const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
-    const SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (SpeechRecognition) {
-      setSpeechSupported(true);
-      const rec = new SpeechRecognition();
-      rec.continuous = true;
-      rec.interimResults = true;
-      rec.lang = patient.languageCode === 'HI' ? 'hi-IN' : 'en-US';
+    setSpeechSupported(speechService.isSupported());
 
-      rec.onresult = (event: any) => {
-        let transcript = '';
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          transcript += event.results[i][0].transcript;
-        }
-        if (transcript.trim()) {
-          setConsultNotes((prev) => `${prev} ${transcript}`);
-        }
-      };
+    return () => {
+      // Clean up recognition session on unmount
+      if (speechService.getIsListening()) {
+        speechService.stop();
+      }
+    };
+  }, []);
 
-      rec.onerror = () => {
-        setIsRecording(false);
-      };
-
-      rec.onend = () => {
-        setIsRecording(false);
-      };
-
-      recognitionRef.current = rec;
+  const handleLanguageChange = (newLang: SupportedLanguage) => {
+    setSelectedLang(newLang);
+    if (isRecording) {
+      speechService.setLanguage(newLang);
     }
-  }, [patient.languageCode]);
+  };
 
   const toggleRecording = () => {
     if (!speechSupported) {
-      // Simulate voice input fallback
+      // Fallback if browser doesn't have Web Speech API
       setConsultNotes(
         (prev) =>
           `${prev}\n[Voice Dictation @ ${new Date().toLocaleTimeString()}]: Patient reports symptoms improved after rest. Vital signs re-verified as normal.`
@@ -65,20 +53,54 @@ export const ConsultationSection: React.FC<ConsultationSectionProps> = ({
     }
 
     if (isRecording) {
-      recognitionRef.current?.stop();
+      const finalRecorded = speechService.stop();
       setIsRecording(false);
+      setInterimText('');
+      if (finalRecorded) {
+        setConsultNotes(finalRecorded);
+      }
     } else {
-      try {
-        recognitionRef.current?.start();
+      setInterimText('');
+      const started = speechService.start(
+        selectedLang,
+        {
+          onStart: () => {
+            setIsRecording(true);
+          },
+          onResult: (finalText, liveInterim) => {
+            if (finalText) {
+              setConsultNotes(finalText);
+            }
+            setInterimText(liveInterim);
+          },
+          onError: (err) => {
+            console.warn('Consultation speech recognition error:', err);
+            setIsRecording(false);
+            setInterimText('');
+          },
+          onEnd: () => {
+            setIsRecording(false);
+            setInterimText('');
+          },
+        },
+        consultNotes
+      );
+
+      if (started) {
         setIsRecording(true);
-      } catch (err) {
-        console.error(err);
       }
     }
   };
 
   const insertQuickPhrase = (phrase: string) => {
-    setConsultNotes((prev) => `${prev}\n• ${phrase}`);
+    setConsultNotes((prev) => {
+      const updated = `${prev}\n• ${phrase}`;
+      if (isRecording) {
+        // restart speech with updated notes so context stays in sync
+        speechService.reset(updated);
+      }
+      return updated;
+    });
   };
 
   const handleCallPatient = () => {
@@ -151,7 +173,37 @@ export const ConsultationSection: React.FC<ConsultationSectionProps> = ({
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
+            {/* Language Selector: EN / HI */}
+            <div className="flex items-center gap-1 bg-[#FAF7F0] p-1 rounded-xl border border-[#E8D8B8]">
+              <span className="text-[10px] font-bold text-[#73787A] px-1.5 uppercase">Language:</span>
+              <button
+                type="button"
+                onClick={() => handleLanguageChange('EN')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  selectedLang === 'EN'
+                    ? 'bg-[#24302F] text-[#FAF7F0] shadow-xs'
+                    : 'text-[#5D6662] hover:text-[#24302F]'
+                }`}
+                title="Dictate in English"
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => handleLanguageChange('HI')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  selectedLang === 'HI'
+                    ? 'bg-[#24302F] text-[#FAF7F0] shadow-xs'
+                    : 'text-[#5D6662] hover:text-[#24302F]'
+                }`}
+                title="हिन्दी में बोलें (Dictate in Hindi)"
+              >
+                HI
+              </button>
+            </div>
+
+            {/* Voice Dictation Trigger */}
             <button
               id="btn-voice-dictate-consult"
               onClick={toggleRecording}
@@ -164,10 +216,24 @@ export const ConsultationSection: React.FC<ConsultationSectionProps> = ({
               <span className="material-symbols-outlined text-[16px]">
                 {isRecording ? 'stop_circle' : 'mic'}
               </span>
-              <span>{isRecording ? 'Listening (Click to Stop)...' : 'Start Voice Dictation'}</span>
+              <span>{isRecording ? '🔴 Listening — Click to Stop' : '🎤 Start Voice Dictation'}</span>
             </button>
           </div>
         </div>
+
+        {/* Interim Speech Live Display */}
+        {isRecording && interimText && (
+          <div className="p-3 bg-amber-50/90 border border-amber-200/80 rounded-xl flex items-center gap-2.5 text-xs text-amber-900 animate-fadeIn">
+            <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping shrink-0" />
+            <div className="min-w-0 flex-1">
+              <span className="font-bold text-[10px] uppercase text-amber-700 mr-2 tracking-wider">Live Speech:</span>
+              <span className="italic font-mono text-amber-950 font-medium">"{interimText}"</span>
+            </div>
+            <span className="text-[10px] text-amber-700 bg-amber-100/70 px-2 py-0.5 rounded-full shrink-0">
+              Capturing ({selectedLang})...
+            </span>
+          </div>
+        )}
 
         {/* Quick Clinical Templates */}
         <div className="space-y-1.5">
@@ -200,7 +266,12 @@ export const ConsultationSection: React.FC<ConsultationSectionProps> = ({
           <textarea
             rows={8}
             value={consultNotes}
-            onChange={(e) => setConsultNotes(e.target.value)}
+            onChange={(e) => {
+              setConsultNotes(e.target.value);
+              if (isRecording) {
+                speechService.reset(e.target.value);
+              }
+            }}
             className="w-full bg-[#FAF7F0] border border-[#E8D8B8] rounded-2xl p-4 text-xs sm:text-sm text-[#24302F] leading-relaxed outline-none focus:border-[#B89A5A] font-mono resize-y"
             placeholder="Type or dictate consultation findings, discussion with patient, and clinical decisions..."
           />
@@ -231,3 +302,4 @@ export const ConsultationSection: React.FC<ConsultationSectionProps> = ({
     </div>
   );
 };
+

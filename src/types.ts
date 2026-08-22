@@ -5,11 +5,11 @@ export type AppView = 'landing' | 'auth' | 'patient-dashboard' | 'doctor-dashboa
 export type DoctorSection =
   | 'patient-queue'
   | 'priority-cases'
-  | 'ai-summary'
-  | 'medical-timeline'
   | 'reports'
+  | 'ai-summary'
   | 'ayush-assessment'
   | 'doctor-edit'
+  | 'patient-report'
   | 'consultation';
 
 export interface VitalSign {

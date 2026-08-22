@@ -22,17 +22,20 @@ import { RedFlagsView } from './patient/views/RedFlagsView';
 import { ReportsView } from './patient/views/ReportsView';
 import { ReviewView } from './patient/views/ReviewView';
 import { SubmitView } from './patient/views/SubmitView';
+import { DoctorsAdviceReportView } from './patient/views/DoctorsAdviceReportView';
 import { SettingsView } from './patient/views/SettingsView';
 import { HelpView } from './patient/views/HelpView';
 
 interface PatientDashboardProps {
   setCurrentView: (view: AppView) => void;
   onNewCaseSubmitted?: (patient: Partial<PatientRecord>) => void;
+  activePatientRecord?: PatientRecord;
 }
 
 export const PatientDashboard: React.FC<PatientDashboardProps> = ({
   setCurrentView,
   onNewCaseSubmitted,
+  activePatientRecord,
 }) => {
   // Navigation State
   const [activeTab, setActiveTab] = useState<PatientTab>('dashboard');
@@ -266,6 +269,14 @@ export const PatientDashboard: React.FC<PatientDashboardProps> = ({
             setActiveTab={setActiveTab}
             onMarkStepComplete={handleMarkStepComplete}
             onNewCaseSubmitted={onNewCaseSubmitted}
+          />
+        );
+      case 'doctor-advice':
+        return (
+          <DoctorsAdviceReportView
+            patientProfile={patientData}
+            activePatientRecord={activePatientRecord}
+            onNavigateTab={(tab) => setActiveTab(tab)}
           />
         );
       case 'settings':

@@ -133,6 +133,15 @@ const SYMPTOM_PATTERNS: { label: string; keywords: string[] }[] = [
     ],
   },
   {
+    label: 'Leg pain / Cramps',
+    keywords: [
+      'cramp', 'cramps', 'leg cramp', 'leg cramps', 'calf pain', 'leg pain', 'calf cramp', 'thigh pain', 'muscle spasm', 'muscle cramps',
+      'ऐंठन', 'मरोड़', 'पैरों में ऐंठन', 'पैर में दर्द', 'पिंडली में दर्द', 'नस खिंचना',
+      'પગમાં દુખાવો', 'પગમાં ગોટલા ચડવા',
+      'கால் வலி', 'தசைப்பிடிப்பு',
+    ],
+  },
+  {
     label: 'Joint pain / Body ache',
     keywords: [
       'joint pain', 'body ache', 'body aches', 'muscle pain', 'myalgia', 'knee pain', 'generalized ache',

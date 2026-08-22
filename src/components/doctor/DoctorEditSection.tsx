@@ -136,10 +136,10 @@ export const DoctorEditSection: React.FC<DoctorEditSectionProps> = ({
         <div>
           <h3 className="font-display font-bold text-lg text-[#24302F] flex items-center gap-2">
             <span className="material-symbols-outlined text-[#B89A5A] text-xl">edit_note</span>
-            Physician Prescription &amp; Clinical Orders Editor
+            Prescription by Doctor &amp; Clinical Orders
           </h3>
           <p className="text-xs text-[#73787A]">
-            Review, modify and electronically certify the diagnosis, medications, and care plan for {patient.name}.
+            Review, modify, prescribe medications, and electronically certify the care plan for {patient.name}.
           </p>
         </div>
 

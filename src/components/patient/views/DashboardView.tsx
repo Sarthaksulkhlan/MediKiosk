@@ -243,68 +243,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
       </div>
 
-      {/* 3. Your Healthcare Journey Timeline */}
-      <div className="bg-white rounded-3xl p-6 border border-[#E8D8B8]/80 shadow-sm space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#E8D8B8]/60">
-          <div>
-            <h2 className="text-lg font-extrabold text-[#24302F] flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#B89A5A]">route</span>
-              <span>Your Healthcare Journey</span>
-            </h2>
-            <p className="text-xs text-[#6B7570]">
-              Click any milestone to jump directly into that step of your intake.
-            </p>
-          </div>
-          <span className="text-xs font-bold text-[#8C6B28] bg-[#FAF7F0] px-3 py-1 rounded-full border border-[#E8D8B8]">
-            {WORKFLOW_STEPS.filter((s) => isStepDone(s.id)).length} of {WORKFLOW_STEPS.length} Milestones Done
-          </span>
-        </div>
-
-        {/* Horizontal Timeline Strip */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 pt-1 scrollbar-thin">
-          {WORKFLOW_STEPS.map((step, idx) => {
-            const isCompleted = isStepDone(step.id);
-            const isNext = step.id === nextStep.id;
-
-            return (
-              <React.Fragment key={step.id}>
-                <button
-                  onClick={() => setActiveTab(step.id)}
-                  className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer border ${
-                    isCompleted
-                      ? 'bg-emerald-50 text-emerald-900 border-emerald-200 hover:bg-emerald-100'
-                      : isNext
-                      ? 'bg-[#24302F] text-[#FAF7F0] border-[#24302F] shadow-sm scale-105'
-                      : 'bg-[#FAF7F0] text-[#5D6662] border-[#E8D8B8] hover:bg-[#F3EBDD]'
-                  }`}
-                >
-                  <span
-                    className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${
-                      isCompleted
-                        ? 'bg-emerald-600 text-white'
-                        : isNext
-                        ? 'bg-[#B89A5A] text-[#1B2423]'
-                        : 'bg-[#E8D8B8] text-[#24302F]'
-                    }`}
-                  >
-                    {isCompleted ? '✓' : idx + 1}
-                  </span>
-                  <span className="material-symbols-outlined text-[16px]">{step.icon}</span>
-                  <span>{step.label}</span>
-                </button>
-
-                {idx < WORKFLOW_STEPS.length - 1 && (
-                  <span className="text-[#C4B698] font-bold text-xs shrink-0 select-none">
-                    →
-                  </span>
-                )}
-              </React.Fragment>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* 4. Bottom Grid: Today's OPD Appointment & Quick Actions */}
+      {/* 3. Bottom Grid: Today's OPD Appointment & Quick Actions */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Today's OPD Appointment Card */}
         <div className="lg:col-span-2 p-6 rounded-3xl bg-white border border-[#E8D8B8]/80 shadow-xs space-y-4">
