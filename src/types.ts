@@ -2,6 +2,16 @@ export type UserRole = 'patient' | 'doctor' | 'staff' | 'kiosk';
 
 export type AppView = 'landing' | 'auth' | 'patient-dashboard' | 'doctor-dashboard' | 'kiosk-mode';
 
+export type DoctorSection =
+  | 'patient-queue'
+  | 'priority-cases'
+  | 'ai-summary'
+  | 'medical-timeline'
+  | 'reports'
+  | 'ayush-assessment'
+  | 'doctor-edit'
+  | 'consultation';
+
 export interface VitalSign {
   name: string;
   value: string;
@@ -25,6 +35,38 @@ export interface MedicalDocument {
   };
 }
 
+export interface TimelineEvent {
+  id: string;
+  date: string;
+  time?: string;
+  title: string;
+  category: 'intake' | 'vitals' | 'consult' | 'lab' | 'rx' | 'history' | 'ayush';
+  description: string;
+  doctorOrSource?: string;
+  status?: string;
+  tags?: string[];
+}
+
+export interface PrescriptionItem {
+  id: string;
+  name: string;
+  dosage: string;
+  frequency: string;
+  duration: string;
+  instructions: string;
+}
+
+export interface AyushProfile {
+  doshaDominance: 'Vata' | 'Pitta' | 'Kapha' | 'Vata-Pitta' | 'Pitta-Kapha' | 'Vata-Kapha' | 'Tridoshic';
+  prakritiDetails: string;
+  agniAssessment: 'Manda (Sluggish)' | 'Tikshna (Intense)' | 'Visham (Irregular)' | 'Sama (Balanced)';
+  dietaryAdvice: string[];
+  lifestyleRecommendations: string[];
+  herbalSupport: string[];
+  physicianIncluded: boolean;
+  notes?: string;
+}
+
 export interface PatientRecord {
   id: string;
   name: string;
@@ -38,11 +80,21 @@ export interface PatientRecord {
   vitalsStatus: string;
   isVitalsAlert?: boolean;
   alertType?: 'BP High' | 'Fever High' | 'Tachycardia' | 'Normal';
+  priorityLevel?: 'Urgent' | 'Elevated' | 'Standard';
+  triageReason?: string;
   waitTime: string;
   aiSummary: {
     status: 'Draft - Review Required' | 'Verified' | 'Signed';
     text: string;
     lastUpdated: string;
+    differentialConsiderations?: string[];
+    redFlags?: string[];
+    soap?: {
+      subjective: string;
+      objective: string;
+      assessment: string;
+      plan: string;
+    };
   };
   hpi: {
     onset: string;
@@ -71,6 +123,13 @@ export interface PatientRecord {
     recordedAt: string;
   };
   documents: MedicalDocument[];
+  timeline?: TimelineEvent[];
+  ayushProfile?: AyushProfile;
+  prescriptions?: PrescriptionItem[];
+  confirmedDiagnosis?: string;
+  examinationFindings?: string;
+  labOrders?: string[];
+  followUpDate?: string;
 }
 
 export interface IntakeSubmission {
@@ -83,3 +142,4 @@ export interface IntakeSubmission {
   medications: string;
   allergies: string;
 }
+
