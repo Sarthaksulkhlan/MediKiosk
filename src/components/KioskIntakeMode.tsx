@@ -464,7 +464,7 @@ export const KioskIntakeMode: React.FC<KioskIntakeModeProps> = ({
                 onClick={() => setCurrentView('doctor-dashboard')}
                 className="w-full sm:w-auto bg-[#24302F] hover:bg-[#1B2423] text-[#FAF7F0] px-7 py-3.5 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer shadow-md"
               >
-                <span>Open in Physician EMR &rarr;</span>
+                <span>Open in Doctor Portal &rarr;</span>
               </button>
 
               <button

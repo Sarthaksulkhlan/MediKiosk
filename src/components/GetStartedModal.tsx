@@ -88,7 +88,7 @@ export const GetStartedModal: React.FC<GetStartedModalProps> = ({
               </div>
             </button>
 
-            {/* Option 2: Physician Workspace */}
+            {/* Option 2: Doctor Portal */}
             <button
               onClick={() => handleSelect('doctor-dashboard', 'doctor')}
               className="w-full text-left p-4 rounded-2xl bg-white/80 hover:bg-white border border-[#E8D8B8]/70 hover:border-[#B89A5A] transition-all group flex items-start gap-4 cursor-pointer shadow-xs hover:shadow-md"
@@ -99,7 +99,7 @@ export const GetStartedModal: React.FC<GetStartedModalProps> = ({
               <div className="flex-grow">
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-semibold text-[#24302F] group-hover:text-[#1B2423]">
-                    Physician EMR Workspace
+                    Doctor Portal
                   </h3>
                   <span className="material-symbols-outlined text-[#B89A5A] text-[18px] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
                     arrow_forward

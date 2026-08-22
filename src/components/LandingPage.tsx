@@ -739,7 +739,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               }}
               className="inline-flex items-center gap-2 bg-[#24302F] hover:bg-[#1B2423] text-[#FAF7F0] px-6 py-3 rounded-full text-xs font-medium transition-all shadow-xs hover:shadow cursor-pointer"
             >
-              <span>Explore Doctor EMR Workspace</span>
+              <span>Explore Doctor Portal</span>
               <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
             </button>
           </div>
