@@ -19,7 +19,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
     userRole === 'doctor' ? 'doctor' : 'patient'
   );
   const [email, setEmail] = useState(
-    userRole === 'doctor' ? 'dr.sharma@medikiosk.health' : 'patient@example.com'
+    userRole === 'doctor' ? 'dr.sharma@health360.health' : 'patient@example.com'
   );
   const [password, setPassword] = useState('••••••••');
   const [showPassword, setShowPassword] = useState(false);
@@ -29,9 +29,9 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
   const handleRoleChange = (role: 'patient' | 'doctor' | 'staff') => {
     setSelectedRole(role);
     if (role === 'doctor') {
-      setEmail('dr.sharma@medikiosk.health');
+      setEmail('dr.sharma@health360.health');
     } else if (role === 'staff') {
-      setEmail('staff.triage@medikiosk.health');
+      setEmail('staff.triage@health360.health');
     } else {
       setEmail('patient@example.com');
     }

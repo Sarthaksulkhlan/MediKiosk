@@ -1,4 +1,4 @@
-// Aura AI - MediKiosk's Healthcare Assistant Engine
+// Aura AI - Health360's Healthcare Assistant Engine
 // Safe, systematic, progressive clinical inquiry in English and Hindi without autonomous diagnosis.
 
 export interface AuraMessage {
@@ -146,7 +146,7 @@ export class AuraAIEngine {
         messages.push({
           id: 'msg-init-1',
           sender: 'aura',
-          text: `नमस्ते ${patientName}। मैं Aura हूँ, MediKiosk का हेल्थकेयर असिस्टेंट। डॉक्टर से आपके परामर्श से पहले आपके लक्षणों को व्यवस्थित करने में आपकी मदद करने के लिए यहाँ हूँ।`,
+          text: `नमस्ते ${patientName}। मैं Aura हूँ, Health360 का हेल्थकेयर असिस्टेंट। डॉक्टर से आपके परामर्श से पहले आपके लक्षणों को व्यवस्थित करने में आपकी मदद करने के लिए यहाँ हूँ।`,
         });
         messages.push({
           id: 'msg-init-2',
@@ -158,7 +158,7 @@ export class AuraAIEngine {
         messages.push({
           id: 'msg-init-1',
           sender: 'aura',
-          text: `Hello ${patientName}. I am Aura, MediKiosk's Healthcare Assistant. I am here to help you organize your symptoms into a structured clinical summary before your consultation with the physician.`,
+          text: `Hello ${patientName}. I am Aura, Health360's Healthcare Assistant. I am here to help you organize your symptoms into a structured clinical summary before your consultation with the physician.`,
         });
         messages.push({
           id: 'msg-init-2',

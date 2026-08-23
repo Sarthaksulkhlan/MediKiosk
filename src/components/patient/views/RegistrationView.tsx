@@ -263,7 +263,7 @@ export const RegistrationView: React.FC<RegistrationViewProps> = ({
               lock
             </span>
             <p className="text-[11px] text-teal-900 leading-relaxed font-medium">
-              <strong>Your health information is encrypted and securely stored.</strong> MediKiosk is fully compliant with India's Digital Personal Data Protection (DPDP) Act 2023.
+              <strong>Your health information is encrypted and securely stored.</strong> Health360 is fully compliant with India's Digital Personal Data Protection (DPDP) Act 2023.
             </p>
           </div>
         </div>

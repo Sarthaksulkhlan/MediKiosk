@@ -143,7 +143,7 @@ export const KioskIntakeMode: React.FC<KioskIntakeModeProps> = ({
         { name: 'Medicine B', dosage: '10 mg', frequency: 'Once daily' },
       ],
       allergies: [],
-      clinicalNotes: 'Intake conducted at MediKiosk Touch & Voice Pod Station.',
+      clinicalNotes: 'Intake conducted at Health360 Touch & Voice Pod Station.',
       vitals: {
         temperature: '98.7°F',
         bloodPressure: '116/74 mmHg',
@@ -224,7 +224,7 @@ export const KioskIntakeMode: React.FC<KioskIntakeModeProps> = ({
         {step === 'language' && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
             <h2 className="font-display text-2xl sm:text-4xl font-bold text-[#24302F] text-center mb-2">
-              Welcome to MediKiosk Intake
+              Welcome to Health360 Intake
             </h2>
             <p className="text-sm sm:text-base text-[#4D5652] text-center mb-8">
               Choose your preferred language to begin speaking with the kiosk.

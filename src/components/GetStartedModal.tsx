@@ -57,7 +57,7 @@ export const GetStartedModal: React.FC<GetStartedModalProps> = ({
               Select Experience
             </span>
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#24302F]">
-              Experience MediKiosk
+              Experience Health360
             </h2>
             <p className="text-sm text-[#4D5652] mt-1">
               Choose your perspective to explore our clinical intake ecosystem.

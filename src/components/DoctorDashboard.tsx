@@ -136,7 +136,7 @@ export const DoctorDashboard: React.FC<DoctorDashboardProps> = ({
                   Dr. Sharma, MD &bull; OPD 3A
                 </span>
                 <span className="hidden sm:inline-block text-[11px] text-[#73787A] font-mono">
-                  &bull; MediKiosk EMR Hub
+                  &bull; Health360 EMR Hub
                 </span>
               </div>
               <h1 className="font-display text-lg sm:text-2xl font-bold text-[#24302F] tracking-tight truncate">

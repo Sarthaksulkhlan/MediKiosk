@@ -19,7 +19,7 @@ export const HelpView: React.FC = () => {
     },
     {
       q: 'What if I have an urgent emergency while filling the intake?',
-      a: 'You can immediately click the "Emergency Help" button or dial 108 for ambulance services. MediKiosk will instantly flag your chart for urgent nursing intervention.',
+      a: 'You can immediately click the "Emergency Help" button or dial 108 for ambulance services. Health360 will instantly flag your chart for urgent nursing intervention.',
     },
   ];
 

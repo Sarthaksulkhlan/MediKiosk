@@ -192,7 +192,7 @@ export const ReportsSection: React.FC<ReportsSectionProps> = ({ patient }) => {
                 </div>
 
                 <div className="pt-4 mt-4 border-t border-[#E8D8B8]/60 flex items-center justify-between text-xs text-[#73787A]">
-                  <span>Authenticated via MediKiosk OCR Vault</span>
+                  <span>Authenticated via Health360 OCR Vault</span>
                   <span className="font-mono text-[#B89A5A] font-bold">{selectedDoc.id}</span>
                 </div>
               </div>

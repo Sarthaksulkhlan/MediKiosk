@@ -121,7 +121,7 @@ export const PatientSidebar: React.FC<PatientSidebarProps> = ({
             <button
               onClick={() => setCurrentView('landing')}
               className="flex items-center gap-2.5 min-w-0 text-left group cursor-pointer"
-              title="Return to MediKiosk Hub"
+              title="Return to Health360 Hub"
             >
               <div className="w-10 h-10 rounded-xl bg-[#24302F] text-[#FAF7F0] flex items-center justify-center shadow-sm border border-[#D8BE88]/40 shrink-0 group-hover:scale-105 transition-transform">
                 <span className="material-symbols-outlined text-[#D8BE88] text-[22px]">
@@ -131,7 +131,7 @@ export const PatientSidebar: React.FC<PatientSidebarProps> = ({
               {!isCollapsed && (
                 <div className="min-w-0">
                   <h1 className="text-base font-extrabold text-[#24302F] tracking-tight flex items-center gap-1">
-                    <span>Medi<span className="text-[#B89A5A]">Kiosk</span></span>
+                    <span>Health<span className="text-[#B89A5A]">360</span></span>
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
                   </h1>
                   <p className="text-[11px] font-medium text-[#7B8580] tracking-tight truncate">

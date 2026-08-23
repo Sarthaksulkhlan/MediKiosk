@@ -37,12 +37,12 @@ export const Logo: React.FC<LogoProps> = ({
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          <linearGradient id="medikiosk-gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="health360-gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#B89A5A" />
             <stop offset="50%" stopColor="#D8BE88" />
             <stop offset="100%" stopColor="#4D5652" />
           </linearGradient>
-          <linearGradient id="medikiosk-sage-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="health360-sage-grad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#24302F" />
             <stop offset="100%" stopColor="#4D5652" />
           </linearGradient>
@@ -55,7 +55,7 @@ export const Logo: React.FC<LogoProps> = ({
           width="70"
           height="52"
           rx="10"
-          stroke="url(#medikiosk-gold-grad)"
+          stroke="url(#health360-gold-grad)"
           strokeWidth="5.5"
           fill="none"
         />
@@ -63,7 +63,7 @@ export const Logo: React.FC<LogoProps> = ({
         {/* Monitor Stand */}
         <path
           d="M40 70 L35 84 H65 L60 70"
-          fill="url(#medikiosk-sage-grad)"
+          fill="url(#health360-sage-grad)"
         />
         {/* Monitor Base Bar */}
         <line
@@ -71,7 +71,7 @@ export const Logo: React.FC<LogoProps> = ({
           y1="84"
           x2="72"
           y2="84"
-          stroke="url(#medikiosk-gold-grad)"
+          stroke="url(#health360-gold-grad)"
           strokeWidth="4"
           strokeLinecap="round"
         />
@@ -82,7 +82,7 @@ export const Logo: React.FC<LogoProps> = ({
         {/* ECG Waveform passing through */}
         <path
           d="M8 44 H34 L40 34 L47 54 L54 39 L60 44 H64"
-          stroke="url(#medikiosk-gold-grad)"
+          stroke="url(#health360-gold-grad)"
           strokeWidth="5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -91,7 +91,7 @@ export const Logo: React.FC<LogoProps> = ({
         {/* Integrated Listening Ear Motif */}
         <path
           d="M65 32 C74 32, 80 38, 80 46 C80 54, 75 58, 70 60 C66 61.5, 63 65, 63 68 C63 70, 65 72, 68 72"
-          stroke="url(#medikiosk-gold-grad)"
+          stroke="url(#health360-gold-grad)"
           strokeWidth="5.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -101,7 +101,7 @@ export const Logo: React.FC<LogoProps> = ({
 
       {showText && (
         <span className={`font-display ${textSizes[size]} ${textColor} tracking-tight select-none`}>
-          MediKiosk
+          Health360
         </span>
       )}
     </div>

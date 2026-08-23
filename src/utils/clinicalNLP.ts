@@ -1,4 +1,4 @@
-// Clinical NLP & Safety Extraction Engine for MediKiosk
+// Clinical NLP & Safety Extraction Engine for Health360
 // Strictly deterministic from the transcript - Zero autonomous diagnosis, Zero hallucinations.
 
 export interface ExtractedClinicalEntities {

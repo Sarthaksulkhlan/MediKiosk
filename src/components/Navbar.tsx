@@ -20,7 +20,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <button
           onClick={() => setCurrentView('landing')}
           className="flex items-center text-left focus:outline-none group cursor-pointer"
-          aria-label="MediKiosk Home"
+          aria-label="Health360 Home"
         >
           <Logo size="md" textColor="text-[#24302F]" />
         </button>

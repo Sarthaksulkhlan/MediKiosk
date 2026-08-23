@@ -70,7 +70,7 @@ export const PatientConsentStep: React.FC<PatientConsentStepProps> = ({
               Purpose of Pre-Consultation Intake
             </h4>
             <p className="text-xs text-[#4D5652] leading-relaxed mt-1">
-              MediKiosk assists you in articulating your symptoms, organizing prior medical records, and drafting a preliminary structured timeline for your attending physician.
+              Health360 assists you in articulating your symptoms, organizing prior medical records, and drafting a preliminary structured timeline for your attending physician.
             </p>
           </div>
         </div>

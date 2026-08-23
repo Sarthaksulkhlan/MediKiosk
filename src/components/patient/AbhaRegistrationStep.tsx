@@ -125,7 +125,7 @@ export const AbhaRegistrationStep: React.FC<AbhaRegistrationStepProps> = ({
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#24302F]">
                 Hospital Demographics
               </h4>
-              <p className="text-[11px] text-[#73787A]">MediKiosk OPD Registration</p>
+              <p className="text-[11px] text-[#73787A]">Health360 OPD Registration</p>
             </div>
           </div>
 
@@ -154,7 +154,7 @@ export const AbhaRegistrationStep: React.FC<AbhaRegistrationStepProps> = ({
       <div className="flex items-center justify-between pt-4 border-t border-[#E8D8B8]/70">
         <div className="flex items-center gap-2 text-xs text-[#73787A]">
           <span className="material-symbols-outlined text-[16px] text-emerald-600">lock</span>
-          <span>Patient identity validated against MediKiosk database.</span>
+          <span>Patient identity validated against Health360 database.</span>
         </div>
 
         <button

@@ -16,7 +16,7 @@ export const MedicalTimelineSection: React.FC<MedicalTimelineSectionProps> = ({
         date: 'Today',
         time: '10:42 AM',
         category: 'intake',
-        title: 'MediKiosk Digital Intake',
+        title: 'Health360 Digital Intake',
         description: `Chief complaint: ${patient.chiefComplaint}. Narrative recorded in ${patient.language}.`,
         doctorOrSource: 'Aura AI Intake Pod',
         status: 'Completed',
@@ -205,7 +205,7 @@ export const MedicalTimelineSection: React.FC<MedicalTimelineSectionProps> = ({
 
                 <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-[#E8D8B8]/50 text-[11px]">
                   <span className="text-[#73787A]">
-                    Source: <strong className="text-[#24302F]">{ev.doctorOrSource || 'MediKiosk System'}</strong>
+                    Source: <strong className="text-[#24302F]">{ev.doctorOrSource || 'Health360 System'}</strong>
                   </span>
 
                   {ev.tags && ev.tags.length > 0 && (

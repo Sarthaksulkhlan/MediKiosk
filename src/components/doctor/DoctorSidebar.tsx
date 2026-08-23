@@ -151,14 +151,14 @@ export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({
                   id="btn-sidebar-brand"
                   onClick={onNavigateHome}
                   className="flex items-center gap-2.5 text-left group cursor-pointer focus:outline-none"
-                  title="Return to MediKiosk Hub"
+                  title="Return to Health360 Hub"
                 >
                   <div className="w-9 h-9 rounded-xl bg-[#24302F] text-[#D8BE88] flex items-center justify-center flex-shrink-0 shadow-xs group-hover:scale-105 transition-transform">
                     <span className="material-symbols-outlined text-[20px]">local_hospital</span>
                   </div>
                   <div className="truncate">
                     <span className="font-display font-bold text-base text-[#24302F] tracking-tight block">
-                      Medi<span className="text-[#B89A5A]">Kiosk</span>
+                      Health<span className="text-[#B89A5A]">360</span>
                     </span>
                     <span className="text-[10px] font-mono text-[#73787A] uppercase tracking-wider block">
                       Physician EMR
@@ -172,7 +172,7 @@ export const DoctorSidebar: React.FC<DoctorSidebarProps> = ({
                 id="btn-sidebar-brand-collapsed"
                 onClick={onNavigateHome}
                 className="w-10 h-10 mx-auto rounded-xl bg-[#24302F] text-[#D8BE88] flex items-center justify-center flex-shrink-0 shadow-xs hover:scale-105 transition-transform cursor-pointer focus:outline-none"
-                title="MediKiosk Physician Hub"
+                title="Health360 Physician Hub"
               >
                 <span className="material-symbols-outlined text-[20px]">local_hospital</span>
               </button>

@@ -61,7 +61,7 @@ export const RedFlagDetectionStep: React.FC<RedFlagDetectionStepProps> = ({
                 Potential Clinical Concern Flagged for Physician Review
               </h3>
               <p className="text-xs text-amber-900 leading-relaxed mt-1">
-                MediKiosk detected potential indicators in your narrative that require elevated attention. Dr. Sharma has been notified to prioritize this during your examination.
+                Health360 detected potential indicators in your narrative that require elevated attention. Dr. Sharma has been notified to prioritize this during your examination.
               </p>
 
               <div className="mt-4 space-y-2">

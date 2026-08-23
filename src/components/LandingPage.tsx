@@ -73,7 +73,7 @@ const HOW_IT_WORKS_STEPS = [
   {
     number: '04',
     title: 'Understand & Organize',
-    description: 'MediKiosk structures the raw narrative into clean clinical domains: Chief Complaint, HPI, Medications, and Allergies.',
+    description: 'Health360 structures the raw narrative into clean clinical domains: Chief Complaint, HPI, Medications, and Allergies.',
     tag: 'Clinical Structuring',
     detail: 'Strict privacy isolation ensures no autonomous diagnoses are made; pure structured intake.',
   },
@@ -277,7 +277,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 onClick={onOpenGetStartedModal}
                 className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#24302F] hover:bg-[#1B2423] text-[#FAF7F0] px-7.5 py-3.5 rounded-full font-medium text-sm sm:text-base transition-all duration-300 shadow-[0_4px_20px_rgba(36,48,47,0.15)] hover:shadow-[0_8px_30px_rgba(184,154,90,0.3)] hover:-translate-y-0.5 cursor-pointer active:translate-y-0"
               >
-                <span>Experience MediKiosk</span>
+                <span>Experience Health360</span>
                 <span className="material-symbols-outlined text-[18px] text-[#D8BE88] group-hover:translate-x-1 transition-transform">
                   arrow_forward
                 </span>
@@ -384,7 +384,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </div>
       </section>
 
-      {/* 5. "HOW MEDIKIOSK WORKS" SECTION */}
+      {/* 5. "HOW HEALTH360 WORKS" SECTION */}
       <section id="how-it-works" className="py-20 md:py-28 px-6 md:px-10 bg-[#F3EBDD]/40 border-y border-[#E8D8B8]/60">
         <div className="max-w-[1280px] mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -392,7 +392,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               The Intelligent Patient Journey
             </span>
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#24302F]">
-              How MediKiosk Works
+              How Health360 Works
             </h2>
             <p className="text-sm sm:text-base text-[#4D5652] mt-2">
               From waiting room arrival to the physician’s desk in five seamless, human-centric steps.
@@ -486,7 +486,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </h2>
             <p className="text-base text-[#4D5652] leading-relaxed mb-6">
               Patients frequently bring stacks of handwritten prescriptions, past discharge papers, and lab reports.
-              MediKiosk extracts medications, dosages, and diagnostic timelines without manual physician typing.
+              Health360 extracts medications, dosages, and diagnostic timelines without manual physician typing.
             </p>
 
             <div className="space-y-3.5 mb-8">
@@ -578,7 +578,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   <span className="absolute left-1.5 top-1.5 w-3.5 h-3.5 rounded-full bg-[#24302F] border-2 border-[#FAF7F0]" />
                   <div className="bg-white/80 p-3.5 rounded-2xl border border-[#E8D8B8]/60">
                     <div className="flex items-center justify-between text-xs mb-1">
-                      <span className="font-bold text-[#24302F]">MediKiosk Intake • Today&apos;s Visit</span>
+                      <span className="font-bold text-[#24302F]">Health360 Intake • Today&apos;s Visit</span>
                       <span className="text-[10px] text-[#B89A5A] font-semibold">22 Aug 2026 (Live)</span>
                     </div>
                     <p className="text-xs text-[#4D5652]">
@@ -601,7 +601,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </span>
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#24302F]">
               Speak naturally. <br />
-              MediKiosk structures the story.
+              Health360 structures the story.
             </h2>
             <p className="text-sm sm:text-base text-[#4D5652] mt-2">
               Patients don&apos;t think in clinical forms. They tell stories. We capture the natural dialect and convert it into structured physician domains.
@@ -803,7 +803,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
               {/* Action Bar */}
               <div className="mt-6 pt-4 border-t border-[#E8D8B8]/60 flex items-center justify-between">
-                <span className="text-[11px] text-[#73787A]">Verified by MediKiosk Intake Engine</span>
+                <span className="text-[11px] text-[#73787A]">Verified by Health360 Intake Engine</span>
                 <button
                   onClick={() => {
                     setUserRole('doctor');
@@ -882,7 +882,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               the time to tell their story.
             </h2>
             <p className="text-base text-[#4D5652] max-w-xl mx-auto mb-8 leading-relaxed">
-              MediKiosk prepares the story before the consultation begins. Experience the workflow across patient, physician, and kiosk environments.
+              Health360 prepares the story before the consultation begins. Experience the workflow across patient, physician, and kiosk environments.
             </p>
             <button
               onClick={onOpenGetStartedModal}
